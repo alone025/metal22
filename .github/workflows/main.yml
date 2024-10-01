@@ -1,0 +1,23 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:       
+    - name: Deploy using ssh
+      uses: appleboy/ssh-action@master
+      with:
+        host: 176.123.169.47
+        username: root
+        key: $SSH_PRIVATE_KEY
+        port: 22
+        script: |
+          cd /var/www/youtube.com/
+          git pull origin main
+          git status
+          npm install --only=prod
