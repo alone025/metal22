@@ -458,7 +458,7 @@ export default async function Home() {
         </div>
         <div className="cards-news mt-6 pl-6 overflow-x-auto flex gap-3 flex-nowrap">
           {
-            cardsData.map((cardData, cardKey)=>(
+            news.map((cardData, cardKey)=>(
               <NewsCard cardData={cardData} key={cardKey} />
             ))
           }

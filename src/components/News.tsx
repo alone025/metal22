@@ -4,7 +4,7 @@ import React from 'react';
 import formatDateString from 'src/utils/formatDateString';
 import slugify from '@sindresorhus/slugify';
 import truncateText from 'src/utils/truncateText';
-import picture from "src/assets/CardImage/metalImage.png"
+
 
 
 export type NewsType = {
@@ -25,7 +25,7 @@ export default function News({
   className,
 }: NewsType) {
   return (
-    <div className={`flex flex-col sm:gap-5 ${className} max-w-[328px] max-[640px]:rounded-lg max-[640px]:border max-[640px]:border-[#E8E8E8]`}>
+    <div className={`flex flex-col sm:gap-5 ${className} max-[640px]:max-w-[328px] max-[640px]:rounded-lg max-[640px]:border max-[640px]:border-[#E8E8E8]`}>
       <div className="relative max-[640px]:hidden h-[300px] w-[520px] max-lg:h-[185px] max-lg:w-[320px]">
         <Image
           src={`data:image/webp;base64,${image}`}
@@ -53,7 +53,7 @@ export default function News({
         </p>
       </div>
       <div className="imgArea sm:hidden w-full">
-        <Image src={`data:image/webp;base64,${image}`} alt='image' className='w-full' />
+        <Image src={`data:image/webp;base64,${image}`} width={'500'} height={'300'} alt='image' className='w-full rounded-t-lg' />
       </div>
       <div className="contexte sm:hidden px-3 py-4">
         <h6 className='text-lg font-medium text-[#131313] line-clamp-1 leading-[23.4px]' >{title}</h6>

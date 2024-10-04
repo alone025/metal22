@@ -25,7 +25,7 @@ export default async function NewsPage({
   const offset = Number(page) === 1 ? 0 : (Number(page) - 1) * 6;
 
   return (
-    <div className="flex flex-col gap-10 bg-[#FBFBFB] px-[120px] pb-[200px] pt-10 max-lg:px-[27px] max-[365px]:px-0">
+    <div className="flex flex-col gap-10 bg-[#FBFBFB] px-[120px] sm:pb-[200px] pt-10 max-sm:px-6 max-lg:px-[27px] max-[365px]:px-0">
       <Breadcrumb
         linksList={[
           { href: '/', name: 'Главная' },
@@ -33,7 +33,7 @@ export default async function NewsPage({
         ]}
       />
 
-        <div className="dive-tope flex flex-row justify-between items-center max-[365px]:px-6">
+        <div className="dive-tope flex flex-row gap-1 flex-wrap justify-between items-center max-[365px]:px-6">
         <h1 className="text-5xl font-medium sm:font-semibold text-[#131313] sm:text-text-blue max-lg:px-[27px] max-sm:px-0 max-lg:text-4xl max-sm:text-2xl">
         НОВОСТИ
       </h1>
@@ -56,11 +56,13 @@ export default async function NewsPage({
       <Suspense>
         <NewsList offset={offset} />
       </Suspense>
-      <Suspense>
-        <Pagination
+      <Suspense >
+       <div className="paginationte max-[640px]:hidden">
+       <Pagination
           currentPage={Number(page)}
           totalPages={Math.ceil(total / 6)}
         />
+       </div>
       </Suspense>
     </div>
   );

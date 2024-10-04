@@ -17,7 +17,7 @@ export default async function NewsList({ offset }: { offset: number }) {
 
 
   return (
-    <div className="grid grid-cols-3 grid-rows-2 max-[365px]:px-6 gap-x-16 gap-y-10 max-[1830px]:flex max-[1830px]:flex-wrap max-[1830px]:justify-center max-lg:mb-[52px] max-lg:flex max-lg:flex-col max-lg:gap-[70px]">
+    <div className="grid grid-cols-3 grid-rows-2 max-[900px]:items-center max-[365px]:px-6 max-sm:gap-y-6 sm:gap-x-16 sm:gap-y-10 max-[1830px]:flex max-[1830px]:flex-wrap max-[1830px]:justify-center max-lg:mb-[52px] max-lg:flex max-lg:flex-col max-lg:gap-[70px]">
       {news &&
         news.map((oneNews) => (
           <News
@@ -27,7 +27,7 @@ export default async function NewsList({ offset }: { offset: number }) {
             texts={oneNews.texts}
             image={oneNews.image}
             date={oneNews.date}
-            className="max-[900px]:items-center"
+            className="max-[900px]:items-center max-[640px]:items-baseline"
           />
         ))}
     </div>

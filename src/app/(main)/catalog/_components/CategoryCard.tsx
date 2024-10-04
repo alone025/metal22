@@ -14,8 +14,8 @@ import AddCategoryPopUp from 'src/app/(main)/catalog/_components/AddCategoryPopU
 
 export default function CategoryCard(category: Category) {
   return (
-    <div className="relative mx-auto flex w-[530px] flex-col items-center justify-between gap-6 bg-gray-2 pt-8 max-lg:w-[320px]">
-      <h3 className="text-center text-[28px] font-bold text-text-blue">
+    <div className="relative sm:mx-auto flex max-[640px]:justify-between rounded-lg sm:rounded-none w-[530px] max-[640px]:p-3 max-sm:w-40 max-sm:h-40 flex-col sm:items-center justify-between sm:gap-6 bg-gray-2 sm:pt-8 max-lg:w-[320px]">
+      <h3 className="text-left sm:text-center w-[min-content] line-clamp-2 text-sm sm:text-[28px] font-normal sm:font-bold text-[#131313] sm:text-text-blue">
         {category.name}
       </h3>
       <a
@@ -38,6 +38,7 @@ export default function CategoryCard(category: Category) {
         </p>
       )}
 
+      <div className="dive max-[640px]:hidden">
       {category.subcategories ? (
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger className="cursor-pointer justify-end gap-5 bg-blue px-[175px] py-3 text-xl font-medium text-white focus:bg-blue active:bg-blue-3 data-[state=open]:bg-blue-3 max-lg:px-[72px]">
@@ -83,6 +84,7 @@ export default function CategoryCard(category: Category) {
           <AddCategoryPopUp {...category} />
         </div>
       )}
+      </div>
     </div>
   );
 }

@@ -2,6 +2,9 @@ import { Breadcrumb } from 'components//Breadcrumb';
 import CategoryCard from 'src/app/(main)/catalog/_components/CategoryCard';
 import { Service } from 'src/app/(main)/catalog/services/[serviceSlug]/page';
 import ServicesSection from 'src/app/(main)/catalog/_components/ServicesSection';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from 'src/components/ui/tab';
+import MobileServiceCard from './_components/MobileServiceCard';
+
 
 export type Category = {
   id: number;
@@ -44,13 +47,14 @@ export default async function CatalogPage() {
   const categories = await getCategories();
   const services = await getServices();
 
+  
   const categoriesWithoutMain = categories.filter((c) => c.id !== 1);
 
   return (
-    <div>
-      <div className="flex flex-col gap-10 bg-[#FBFBFB] px-[120px] pb-[200px] pt-10 max-lg:px-[27px] max-lg:pb-[120px] max-[350px]:p-0 max-[350px]:pb-[120px]">
+    <div className='max-[640px]:bg-[#FBFBFB] py-2 sm:py-0'>
+      <div className="flex flex-col gap-6 sm:gap-10 rounded-b-lg bg-white sm:bg-[#FBFBFB] px-[120px] pb-[200px] pt-10 max-lg:px-[27px] max-lg:pb-[120px] max-[640px]:p-6 max-[350px]:pb-[50px]">
         <Breadcrumb
-          mainClassName="!block"
+          mainClassName="sm:!block"
           className={'max-md:text-lg'}
           linksList={[
             { href: '/', name: 'Главная' },
@@ -59,20 +63,49 @@ export default async function CatalogPage() {
         />
 
         <h2
-          className="text-5xl font-semibold text-text-blue max-lg:text-4xl"
+          className="text-5xl font-medium sm:font-semibold text-[#131313] sm:text-text-blue max-lg:text-4xl max-sm:text-2xl"
           id="catalog-items"
         >
           КАТАЛОГ
         </h2>
-        <div className="flex flex-wrap gap-10">
+        <div className="hidden sm:flex flex-wrap gap-10">
           {categoriesWithoutMain &&
             categoriesWithoutMain.map((category) => (
               <CategoryCard key={category.id} {...category} />
             ))}
         </div>
+
+        <div className="tabse-contente">
+     
+     <Tabs defaultValue="account">
+ <TabsList>
+   <TabsTrigger value="account">Продукция</TabsTrigger>
+   <TabsTrigger value="password">Услуги</TabsTrigger>
+ </TabsList> 
+ <TabsContent value="account">
+  <div className="flex flex-wrap gap-2 justify-center">
+  {categoriesWithoutMain &&
+            categoriesWithoutMain.map((category) => (
+              <CategoryCard key={category.id} {...category} />
+            ))}
+  </div>
+ </TabsContent>
+ <TabsContent value="password">
+  <div className="usluguiie flex flex-wrap gap-2 justify-center">
+  {services.map((service) => (
+       <MobileServiceCard service={service} key={service.Id}/>
+        ))}
+  </div>
+ </TabsContent>
+</Tabs>
+
+     </div>
+
+
       </div>
 
-      <div>
+
+      <div className='max-[640px]:hidden'>
         <ServicesSection services={services ? services : []} />
       </div>
     </div>
