@@ -39,7 +39,7 @@ export default async function ServicePage({
   const service = await fetchService(Number(id));
 
   return (
-    <div className="mx-auto flex flex-col gap-10 bg-[#FBFBFB] px-[120px] pb-[200px] pt-10 max-lg:px-[27px] max-lg:pt-[64px] max-sm:px-0 max-sm:pt-0 max-sm:pb-[50px]">
+    <div className="mx-auto flex flex-col sm:gap-10 bg-[#FBFBFB] px-[120px] pb-[200px] pt-10 max-lg:px-[27px] max-lg:pt-[64px] max-sm:px-0 max-sm:pt-0 max-sm:pb-[50px]">
       <Breadcrumb
         linksList={[
           { href: '/', name: 'Главная' },
@@ -48,7 +48,7 @@ export default async function ServicePage({
         ]}
       />
   
-      <div className="mobile-breadcrumb-news sm:hidden p-6">
+      <div className="mobile-breadcrumb-news sm:hidden p-6 mb-3">
         <BreadcrumbShad>
           <BreadcrumbItem className='h-4 text-[#131313]'>
           <BreadcrumbLink className='text-sm text-[#131313] font-normal font-roboto' as={Link} href='/catalog' >
@@ -56,7 +56,7 @@ export default async function ServicePage({
           </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbItem className='h-4'>
-          <BreadcrumbLink className='text-sm font-roboto font-normal text-[#3C3C434D]' as={Link} href={`/news/${params.serviceSlug}`} >
+          <BreadcrumbLink className='text-sm font-roboto font-normal text-[#3C3C434D]' as={Link} href={`/catalog/services/${params.serviceSlug}`} >
           {service.Title}
           </BreadcrumbLink>
           </BreadcrumbItem>

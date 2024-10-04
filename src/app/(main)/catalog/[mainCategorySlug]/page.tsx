@@ -58,6 +58,9 @@ export default async function CategoryPage({
           { href: params.mainCategorySlug, name: category.name },
         ]}
       />
+
+
+
       {category.Discount > 0 && category.Discount < 100 && (
         <p className="mx-auto text-red-500">Скидка {category.Discount}%</p>
       )}
