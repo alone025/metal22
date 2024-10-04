@@ -50,9 +50,10 @@ export default async function CatalogPage() {
   
   const categoriesWithoutMain = categories.filter((c) => c.id !== 1);
 
+
   return (
     <div className='max-[640px]:bg-[#FBFBFB] py-2 sm:py-0'>
-      <div className="flex flex-col gap-6 sm:gap-10 rounded-b-lg bg-white sm:bg-[#FBFBFB] px-[120px] pb-[200px] pt-10 max-lg:px-[27px] max-lg:pb-[120px] max-[640px]:p-6 max-[350px]:pb-[50px]">
+      <div className="flex flex-col gap-6 sm:gap-10 rounded-b-lg bg-white sm:bg-[#FBFBFB] px-[120px] pb-[200px] pt-10 max-lg:px-[27px] max-lg:pb-[120px] max-[640px]:p-6 max-[640px]:pb-[50px]">
         <Breadcrumb
           mainClassName="sm:!block"
           className={'max-md:text-lg'}
@@ -77,21 +78,21 @@ export default async function CatalogPage() {
 
         <div className="tabse-contente">
      
-     <Tabs defaultValue="account">
+     <Tabs defaultValue="product">
  <TabsList>
-   <TabsTrigger value="account">Продукция</TabsTrigger>
-   <TabsTrigger value="password">Услуги</TabsTrigger>
+   <TabsTrigger value="product">Продукция</TabsTrigger>
+   <TabsTrigger value="services">Услуги</TabsTrigger>
  </TabsList> 
- <TabsContent value="account">
-  <div className="flex flex-wrap gap-2 justify-center">
+ <TabsContent value="product">
+  <div className="flex flex-wrap gap-2 justify-center mt-8">
   {categoriesWithoutMain &&
             categoriesWithoutMain.map((category) => (
               <CategoryCard key={category.id} {...category} />
             ))}
   </div>
  </TabsContent>
- <TabsContent value="password">
-  <div className="usluguiie flex flex-wrap gap-2 justify-center">
+ <TabsContent value="services">
+  <div className="usluguiie flex flex-wrap gap-2 justify-center mt-8">
   {services.map((service) => (
        <MobileServiceCard service={service} key={service.Id}/>
         ))}
