@@ -204,42 +204,36 @@ export default function ProductsList({
   });
 
   return (
-    <>
+    <div>
       <h1
         ref={titleRef}
-        className="text-5xl font-semibold text-text-blue max-lg:text-4xl max-sm:text-2xl"
+        className="text-[24px] font-[500] text-black pl-[2px] max-lg:text-4xl max-sm:text-2xl mb-[15px]"
       >
         {categoryName}
       </h1>
       <div>
-        <div className="flex flex-wrap gap-4 pb-2">
-          {Object.entries(selectedFilters).map(([key, value]) => (
-            <div key={key} className="relative w-fit p-4 pl-1">
-              <span className="font-semibold">{key}</span> : {value}
-              <Button
-                variant="ghost"
-                className="absolute right-0 top-0 h-fit w-fit p-0"
-                onClick={() => removeFilter(key)}
-              >
-                <XCircle className="h-4 w-4 text-blue transition hover:text-red-500 " />
-              </Button>
-            </div>
-          ))}
-        </div>
-        <div className="flex items-center gap-20 pl-[34px] max-lg:flex-wrap max-lg:gap-1 max-lg:pl-0 ">
+        {/* <div className="flex flex-wrap gap-4 pb-2">
+          
+        </div> */}
+        <div className="flex items-center gap-20 max-lg:flex-wrap max-lg:gap-1 max-lg:pl-0 ">
           <p className="w-[200px] text-base font-normal max-lg:hidden">
             Наименование
           </p>
           {sortedFilters.map((filter) => (
             <DropdownMenu modal={false} key={filter.name + filter.id}>
-              <DropdownMenuTrigger className="w-[150px] cursor-pointer justify-start gap-2 text-base font-normal text-black max-lg:text-xs">
+              <DropdownMenuTrigger className="w-[150px] cursor-pointer justify-start text-base font-normal text-black max-lg:text-xs">
                 {filter.name}
+                {selectedFilters[filter.name] && (
+                  <div className="relative w-fit pl-1">
+                    : {selectedFilters[filter.name]}
+                  </div>
+                )}
               </DropdownMenuTrigger>
               <DropdownMenuContent className="flex w-full flex-col gap-0.5 bg-[#FBFBFB] p-0 shadow">
                 {filter.uniqueVariants.map((variant, index) => (
                   <DropdownMenuItem
                     key={index}
-                    className=" text-max-lg w-[281px] cursor-pointer justify-center bg-white p-5 font-medium text-black hover:bg-white"
+                    className="text-max-lg w-[281px] cursor-pointer justify-center bg-white p-5 font-medium text-black hover:bg-white"
                     asChild
                   >
                     <Button
@@ -253,6 +247,7 @@ export default function ProductsList({
               </DropdownMenuContent>
             </DropdownMenu>
           ))}
+
           <p className="w-[200px] text-base font-normal max-lg:hidden">Цена</p>
         </div>
 
@@ -260,29 +255,29 @@ export default function ProductsList({
           {pageProducts.map(({ Product, Filters }) => (
             <div
               key={Product.name + Product.id}
-              className="z-10 flex justify-between gap-20 border-[1px] border-[#0000001A] p-[34px] max-lg:flex-col max-lg:gap-6 max-lg:p-[20px]"
+              className="z-10 flex justify-between gap-20 rounded-[8px] bg-white p-[34px] max-lg:flex-col max-lg:gap-6 max-lg:p-[20px]"
             >
               <a
-                className="text-max-lg relative z-10 flex w-full  items-center gap-20 font-normal text-black max-lg:flex-col max-lg:items-start max-lg:gap-[20px]"
+                className="text-max-lg relative z-10 flex w-full  items-center font-normal text-black max-lg:flex-col max-lg:items-start gap-[7px]"
                 href={`${categorySlug}/${slugify(Product.name)}-${Product.id}`}
               >
-                <p className="w-[200px]  italic text-text-blue">
+                <p className="text-[18px] font-[500] text-black">
                   {Product.name}
                 </p>
                 {Filters &&
                   Filters.map((filter) => (
                     <p
                       key={filter.id + Product.id}
-                      className="flex w-[150px] justify-center max-lg:w-full max-lg:justify-normal max-lg:gap-2"
+                      className="flex w-[150px] justify-center max-lg:w-full max-lg:justify-normal"
                     >
-                      <span className="hidden max-lg:block">
-                        {filter.name}:
+                      <span className="hidden max-lg:block text-[#3C3C4399] gap-2">
+                        {filter.name}: 
                       </span>
                       {filter.value}
                     </p>
                   ))}
                 <p className="flex flex-row gap-2">
-                  <span className="hidden max-lg:block">Цена:</span>
+                  <span className="hidden max-lg:block text-[#3C3C4399]">Цена:</span>
                   {getProductPrice(Product)}
                 </p>
                 {Product.discount > 0 && Product.discount < 100 && (
@@ -293,7 +288,7 @@ export default function ProductsList({
               </a>
               <AddToCartPopUp
                 trigger={
-                  <Button className="text-max-lg relative z-20 h-[55px] w-[210px] rounded-none bg-blue-3 font-medium text-white max-lg:w-auto">
+                  <Button className="text-max-lg relative z-20 h-[55px] rounded-[8px] w-[210px] bg-[#307BAA] font-medium text-white max-lg:w-auto">
                     В корзину
                   </Button>
                 }
@@ -312,6 +307,6 @@ export default function ProductsList({
           changePage={changePage}
         />
       </div>
-    </>
+    </div>
   );
 }

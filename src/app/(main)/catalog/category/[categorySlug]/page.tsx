@@ -77,10 +77,10 @@ export default async function SubCategoryPage({
     : [];
 
   return (
-    <div className="flex flex-col gap-10 bg-[#FBFBFB] px-[120px] pb-[200px] pt-10 max-lg:px-[27px] max-lg:pt-[65px]">
+    <div className="flex flex-col gap-10 px-[120px] pb-[200px] pt-10 max-lg:px-[27px] max-lg:pt-[65px]">
       <Breadcrumb
         mainClassName="!block"
-        className={'max-md:text-lg'}
+        className={'max-md:text-lg flex items-center'}
         linksList={[
           { href: '/', name: 'Главная' },
           { href: '/catalog', name: 'Каталог' },
