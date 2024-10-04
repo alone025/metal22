@@ -176,23 +176,34 @@ export default function CartPage() {
         />
       </div> */}
 
-      <div className="flex flex-col gap-10 px-[120px] max-lg:px-[27px] pt-[24px]">
-        <h1 className="text-[24px] font-semibold text-black border-b border-b-[#3C3C432E] pb-[24px]">
+      <div className="flex flex-col gap-10 px-[120px] pt-[24px] max-lg:px-[27px]">
+        <h1 className="border-b border-b-[#3C3C432E] pb-[24px] text-[24px] font-semibold text-black">
           Корзина ({totalItems})
         </h1>
         <div className="flex flex-col gap-12">
-          <div className="flex flex-col gap-12">
-            {isLoading ? (
-              <div className="border-[1px] border-[#0000001A] p-8">
-                <p className="text-max-lg font-normal opacity-50">
-                  Загрузка...
-                </p>
+          {productsInCart.length === 0 ? (
+            <div>
+              <p className="text-[#131313] text-[16px] font-[400]">
+                Корзина пуста
+              </p>
+            </div>
+          ) : (
+            <>
+              <div className="flex flex-col gap-12">
+                {isLoading ? (
+                  <div className="border-[1px] border-[#0000001A] p-8">
+                    <p className="text-max-lg font-normal opacity-50">
+                      Загрузка...
+                    </p>
+                  </div>
+                ) : (
+                  renderProducts()
+                )}
               </div>
-            ) : (
-              renderProducts()
-            )}
-          </div>
-          <div className="flex flex-col gap-4">
+              <Button>Оформить ({totalItems})</Button>
+            </>
+          )}
+          <div className="hidden flex-col gap-4 md:flex">
             <p className="text-2xl font-semibold text-black">
               Товаров: {totalItems}
             </p>
