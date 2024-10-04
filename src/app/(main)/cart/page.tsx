@@ -164,8 +164,8 @@ export default function CartPage() {
   };
 
   return (
-    <div className="flex min-h-[895px] w-full flex-col gap-10 bg-[#FBFBFB] pb-20 max-lg:min-h-full max-lg:pb-[200px]">
-      <div className="pl-[120px] pt-10 max-lg:pl-[27px]">
+    <div className="flex min-h-[895px] w-full flex-col gap-10 pb-20 max-lg:min-h-full max-lg:pb-[200px]">
+      {/* <div className="pl-[120px] pt-10 max-lg:pl-[27px]">
         <Breadcrumb
           mainClassName="!block"
           className={'max-md:text-lg'}
@@ -174,11 +174,11 @@ export default function CartPage() {
             { href: '/cart', name: 'Корзина' },
           ]}
         />
-      </div>
+      </div> */}
 
-      <div className="flex flex-col gap-10 px-[120px] max-lg:px-[27px]">
-        <h1 className="text-5xl font-semibold uppercase text-text-blue">
-          Корзина
+      <div className="flex flex-col gap-10 px-[120px] max-lg:px-[27px] pt-[24px]">
+        <h1 className="text-[24px] font-semibold text-black border-b border-b-[#3C3C432E] pb-[24px]">
+          Корзина ({totalItems})
         </h1>
         <div className="flex flex-col gap-12">
           <div className="flex flex-col gap-12">
