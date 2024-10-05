@@ -3,6 +3,10 @@ import React from 'react';
 import { Category } from 'src/app/(main)/catalog/page';
 import findIdInSlug from 'src/utils/findIdInSlug';
 import ProductsList from 'src/app/(main)/catalog/category/[categorySlug]/_components/ProductsList';
+import { BreadcrumbItem, BreadcrumbLink, Breadcrumb as BreadcrumbShad } from 'src/components/ui/breadcrumb';
+
+import slugify from '@sindresorhus/slugify';
+import Link from 'next/link';
 
 export type Product = {
   Product: {
@@ -79,7 +83,7 @@ export default async function SubCategoryPage({
   return (
     <div className="flex flex-col gap-10 px-[120px] pb-[200px] pt-10 max-lg:px-[27px] max-lg:pt-[65px]">
       <Breadcrumb
-        mainClassName="!block"
+        mainClassName="sm:!block"
         className={'max-md:text-lg flex items-center'}
         linksList={[
           { href: '/', name: 'Главная' },
@@ -87,6 +91,21 @@ export default async function SubCategoryPage({
           { href: params.categorySlug, name: category.name },
         ]}
       />
+        <div className="mobile-breadcrumb-news sm:hidden p-6 mb-3">
+        <BreadcrumbShad>
+          <BreadcrumbItem className='h-4 text-[#131313]'>
+          <BreadcrumbLink className='text-sm text-[#131313] font-normal font-roboto' as={Link} href='/catalog' >
+          Каталог
+          </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbItem className='h-4'>
+          <BreadcrumbLink className='text-sm font-roboto font-normal text-[#3C3C434D]' as={Link} href={`/catalog/category/${slugify(category.name)}-${category.id}`} >
+          {category.name}
+          </BreadcrumbLink>
+          </BreadcrumbItem>
+        
+        </BreadcrumbShad>
+      </div>
       <div className="flex flex-col gap-10">
         <ProductsList
           initialProducts={sortedProducts}
