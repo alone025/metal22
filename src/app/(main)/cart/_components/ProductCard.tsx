@@ -1,3 +1,4 @@
+'use client'
 import { Button } from 'components//ui/button';
 
 import Image from 'next/image';
@@ -15,14 +16,52 @@ import {
   SelectTrigger,
   SelectValue,
 } from 'src/components/ui/select';
+import { useEffect, useState } from 'react';
 
 type ProductCardProps = fetchedProductWithAmount & {
   deleteProduct(id: string): void;
   town: string;
 };
+type DataItem = string;
 
 export default function ProductCard(product: ProductCardProps) {
   // console.log(product.filters)
+  const [number, setNumber] = useState<number>(0);
+  const [filteredString, setFilteredString] = useState<string>("");
+
+  const extractNumberFromMixedData = (data: DataItem): number => {
+    const match = data.match(/[\d.]+/); 
+    return match ? parseFloat(match[0]) : 0;
+  };
+
+
+  const extractAndFilterString = (data: DataItem): string => {
+    const stringPart = data.replace(/[\d.]+/g, '').trim();
+    return stringPart
+  };
+
+  const minuse = () => {
+    if (number !== null && number > 0) {
+      setNumber(number - 1);
+    }
+  }
+
+  const pluse = () => {
+    if (number !== null) {
+      setNumber(number + 1);
+    }
+  }
+
+  useEffect(() => {
+    
+    const extractedNumber = extractNumberFromMixedData(product.amount);
+    setNumber(extractedNumber);
+
+
+    const filtered = extractAndFilterString(product.amount);
+    setFilteredString(filtered);
+  }, [product.amount]);
+
   return (
     <div className="flex justify-between gap-10 ">
       <div className="flex h-full flex-1 justify-between bg-white p-8 max-lg:w-[320px] max-lg:flex-col max-lg:gap-[60px] max-lg:p-[20px] max-[360px]:p-2 max-[332px]:p-1">
@@ -37,9 +76,14 @@ export default function ProductCard(product: ProductCardProps) {
               {product.product.name}
             </p>
             <div
-              onClick={() =>
+              onClick={() =>{
                 product.deleteProduct(product.product.id.toString())
+                window.open(`/catalog/category/${slugify(product.product.category_name)}-${
+            product.product.category_id
+          }/${slugify(product.product.name)}-${product.product.id}`,"_current")
               }
+              }
+              
               className='md:hidden'
             >
               <svg
@@ -72,22 +116,24 @@ export default function ProductCard(product: ProductCardProps) {
 
           <p className="w-52 text-black">
             <span className="text-[14px] text-[#3C3C4399]">Цена: </span>
-            {product.amount}
+            {product.product.price}
           </p>
         </a>
         <div className="flex items-center justify-between">
-          <Select>
+          <Select value={filteredString} onValueChange={setFilteredString}>
             <SelectTrigger className="flex items-center justify-center gap-[20px] rounded-[8px] border border-[#3C3C4399] px-[16px] py-[10px]">
-              <SelectValue placeholder="Штуки" />
+              <SelectValue />
             </SelectTrigger>
+            
             <SelectContent>
-              <SelectItem value="Штуки1">Штуки1</SelectItem>
-              <SelectItem value="Штуки2">Штуки2</SelectItem>
-              <SelectItem value="Штуки3">Штуки3</SelectItem>
+            <SelectItem value="м²">м²</SelectItem>
+              <SelectItem value="штуки">Штуки</SelectItem>
+              <SelectItem value="м">м</SelectItem>
+              <SelectItem value="тн">Тонны</SelectItem>
             </SelectContent>
           </Select>
           <div className="flex items-center gap-[6px]">
-            <Button className="flex h-[44px] w-[44px] items-center justify-center rounded-[8px] bg-[#131313]">
+            <Button onClick={()=> minuse()} className="flex h-[44px] w-[44px] items-center justify-center rounded-[8px] bg-[#131313]">
               {' '}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -102,8 +148,8 @@ export default function ProductCard(product: ProductCardProps) {
                 />
               </svg>
             </Button>
-            <Input className="mx-auto flex h-[44px] w-[69px] items-center justify-center gap-[10px] rounded-[8px] border-[1px] border-[#3C3C434D] text-center  outline-none"></Input>
-            <Button className="flex h-[44px] w-[44px] items-center justify-center rounded-[8px] bg-[#131313]">
+            <Input className="mx-auto flex h-[44px] w-[69px] items-center justify-center gap-[10px] rounded-[8px] border-[1px] border-[#3C3C434D] text-center  outline-none" value={number}/>
+            <Button onClick={()=> pluse()} className="flex h-[44px] w-[44px] items-center justify-center rounded-[8px] bg-[#131313]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"

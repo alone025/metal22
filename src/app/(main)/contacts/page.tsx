@@ -22,20 +22,20 @@ export default function ContactsPage() {
         и обеспечим качественное обслуживание. Мы готовы ответить на все ваши вопросы и начать вместе строить надежные связи</p>
        
         <div className="btns-mean mt-8 flex flex-col gap-2 mx-6 pb-6">
-      <div className="btne-1 p-4 flex items-center justify-between bg-[#307BAA] rounded-lg">
+      <a href="mailto:info_krd@marcas.pro" className="btne-1 p-4 flex items-center justify-between bg-[#307BAA] rounded-lg">
         <a className='text-[17px] font-roboto font-normal text-[#F2F5F7]' href="mailto:info_krd@marcas.pro">info_krd@marcas.pro</a>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
   <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z" fill="#F2F5F7"/>
 </svg>
-      </div>
-      <div className="btne-2 p-4 flex justify-between bg-[#131313] rounded-lg">
+      </a>
+      <a href="tel:+8(800)300-74-16" className="btne-2 p-4 flex justify-between bg-[#131313] rounded-lg">
        <a href="tel:+8(800)300-74-16" className='text-base max-w-[203px] font-roboto font-light text-[#F2F5F7]'>
        <span className='text-[17px] font-roboto font-normal text-[#F2F5F7]'>8(800)300-74-16</span> для всех клиентов в РФ (пн-вс с 8:00 до 17:00)
        </a>
        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
   <path d="M19.23 15.2598L16.69 14.9698C16.08 14.8998 15.48 15.1098 15.05 15.5398L13.21 17.3798C10.38 15.9398 8.06004 13.6298 6.62004 10.7898L8.47004 8.93976C8.90004 8.50977 9.11004 7.90977 9.04004 7.29977L8.75004 4.77977C8.63004 3.76977 7.78004 3.00977 6.76004 3.00977H5.03004C3.90004 3.00977 2.96004 3.94977 3.03004 5.07977C3.56004 13.6198 10.39 20.4398 18.92 20.9698C20.05 21.0398 20.99 20.0998 20.99 18.9698V17.2398C21 16.2298 20.24 15.3798 19.23 15.2598Z" fill="#F2F5F7"/>
 </svg>
-      </div>
+      </a>
     </div>
         </div>
 

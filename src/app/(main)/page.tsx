@@ -420,7 +420,12 @@ export default async function Home() {
           </div>
           <Image src={truckImg} height={290} alt="truck image" />
         </div>
-        <div className="mobile-contente sm:hidden py-[60px]">
+        <div className="mobile-contente sm:hidden py-[60px] relative">
+          <div className="iconke absolute top-0 right-6">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="64" viewBox="0 0 32 64" fill="none">
+  <path d="M0 64V0H32V64L16.5333 50.9831L0 64Z" fill="#154FCA"/>
+</svg>
+          </div>
          <div className="tope-scn pl-6">
          <h4 className='text-2xl font-medium text-white mb-4 pr-4'>ПАРТНЁРСТВО</h4>
          <p className='text-base font-light text-[#E8E8E8] pr-4 mb-6' >С нами сотрудничают крупнейшие компании по металлургии в России</p>

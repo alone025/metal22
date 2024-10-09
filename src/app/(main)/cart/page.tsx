@@ -165,16 +165,16 @@ export default function CartPage() {
 
   return (
     <div className="flex min-h-[895px] w-full flex-col gap-10 pb-20 max-lg:min-h-full max-lg:pb-[200px]">
-      {/* <div className="pl-[120px] pt-10 max-lg:pl-[27px]">
+      <div className="pl-[120px] pt-10 max-lg:pl-[27px]">
         <Breadcrumb
-          mainClassName="!block"
+          mainClassName="sm:!block"
           className={'max-md:text-lg'}
           linksList={[
             { href: '/', name: 'Главная' },
             { href: '/cart', name: 'Корзина' },
           ]}
         />
-      </div> */}
+      </div>
 
       <div className="flex flex-col gap-10 px-[120px] pt-[24px] max-lg:px-[27px]">
         <h1 className="border-b border-b-[#3C3C432E] pb-[24px] text-[24px] font-semibold text-black">

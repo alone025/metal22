@@ -39,7 +39,7 @@ const SwipperCompany: React.FC<Props> = ({slides}) => {
     >
       {
         slides.map((slideD, slideK)=>(
-            <SwiperSlide key={slideK} className='!flex items-center justify-center !h-[100px] rounded-lg bg-[#FFFFFF0D]' >
+            <SwiperSlide key={slideK} className='!flex items-center min-w-[158px] justify-center !h-[100px] rounded-lg bg-[#FFFFFF0D]' >
                 <Image src={slideD.img} alt={slideD.alt} />
             </SwiperSlide>
         ))

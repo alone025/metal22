@@ -224,7 +224,7 @@ export default function ProductsList({
               <DropdownMenuTrigger className="w-[150px] cursor-pointer justify-start text-base font-normal text-black max-lg:text-xs">
                 {filter.name}
                 {selectedFilters[filter.name] && (
-                  <div className="relative w-fit pl-1">
+                  <div onClick={()=> removeFilter(filter.name)} className="relative w-fit pl-1">
                     : {selectedFilters[filter.name]}
                   </div>
                 )}
