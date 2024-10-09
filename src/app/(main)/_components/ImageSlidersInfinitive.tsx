@@ -1,7 +1,12 @@
 'use client';
 
+import { CopyIcon } from 'lucide-react';
 import Image, { StaticImageData } from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
+import { Button } from 'src/components/ui/button';
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from 'src/components/ui/dialog';
+import { Input } from 'src/components/ui/input';
+import { Label } from 'src/components/ui/label';
 
 interface ImageSliderProps {
   images: StaticImageData[];
@@ -11,6 +16,8 @@ const ImageSliderInfinitive: React.FC<ImageSliderProps> = ({ images }) => {
   const topRowRef = useRef<HTMLDivElement>(null);
   const bottomRowRef = useRef<HTMLDivElement>(null);
 
+  const [modalOpen , setModalOpen] = useState(false)
+
   const [isPaused, setIsPaused] = useState<boolean>(false);
 
 
@@ -18,7 +25,7 @@ const ImageSliderInfinitive: React.FC<ImageSliderProps> = ({ images }) => {
     row.scrollLeft += speed;
 
     if (row.scrollLeft >= row.scrollWidth / 2) {
-      row.scrollLeft = 0;
+      row.scrollLeft = 15;
     }
 
     if (row.scrollLeft <= 0) {
@@ -60,6 +67,29 @@ const ImageSliderInfinitive: React.FC<ImageSliderProps> = ({ images }) => {
   const duplicatedImages = [...images, ...images];
 
   return (
+    <>
+   {
+    modalOpen &&  (
+      <>
+<div className="fixed inset-0 bg-black bg-opacity-50 z-50" onClick={()=> setModalOpen(false)} ></div>
+
+
+<div className="fixed inset-0 flex items-center justify-center z-50">
+  <div className="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full relative">
+    <button onClick={()=> setModalOpen(false)} className="absolute font-roboto text-2xl top-2 right-2 text-gray-500 hover:text-gray-800">
+      &times;
+    </button>
+    <Image src={duplicatedImages[0]} alt='' />
+  </div>
+</div>
+      </>
+    )
+    
+   }
+
+
+
+
     <div className="flex flex-col space-y-4 overflow-hidden pt-[60px] pb-8 bg-white">
 
 
@@ -76,6 +106,7 @@ const ImageSliderInfinitive: React.FC<ImageSliderProps> = ({ images }) => {
             width={200}
             height={200}
             alt={`slider-image-${idx}`}
+            onClick={()=> setModalOpen(true)}
             className="w-52 h-36 object-cover cursor-pointer hover:scale-110 transition-transform duration-300"
           />
         ))}
@@ -96,10 +127,13 @@ const ImageSliderInfinitive: React.FC<ImageSliderProps> = ({ images }) => {
             height={200}
             alt={`slider-image-${idx}`}
             className="w-52 h-36 object-cover cursor-pointer hover:scale-110 transition-transform duration-300"
+            onClick={()=> setModalOpen(true)}
           />
         ))}
       </div>
+     
     </div>
+    </>
   );
 };
 
