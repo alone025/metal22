@@ -67,7 +67,7 @@ export function AddToCartPopUp({
   return (
     <Dialog>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="max-w-[1280px] gap-10 bg-white max-lg:min-h-[600px]">
+      <DialogContent className="max-w-[1280px] gap-10 bg-white max-lg:min-h-[600px] max-sm:min-h-max">
         <DialogHeader>
           <a
             className="text-max-lg relative z-10 mt-10 flex w-full items-center gap-20 border-[1px] border-[#0000001A] p-[34px] font-normal text-black max-lg:mt-0 max-lg:w-[281px] max-lg:flex-col max-lg:items-start max-lg:gap-[24px] max-lg:p-[20px]"
