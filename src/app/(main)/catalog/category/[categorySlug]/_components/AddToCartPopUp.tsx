@@ -65,60 +65,139 @@ export function AddToCartPopUp({
     : `${slugify(category_name ?? '')}-${category_id}`;
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="max-w-[1280px] gap-10 bg-white max-lg:min-h-[600px]">
-        <DialogHeader>
-          <a
-            className="text-max-lg relative z-10 mt-10 flex w-full items-center gap-20 border-[1px] border-[#0000001A] p-[34px] font-normal text-black max-lg:mt-0 max-lg:w-[281px] max-lg:flex-col max-lg:items-start max-lg:gap-[24px] max-lg:p-[20px]"
-            href={`/catalog/category/${linkToCategory}/${slugify(name)}-${id}`}
-          >
-            <p className="w-[200px] text-text-blue max-lg:w-auto">{name}</p>
-            {filters &&
-              filters.map((filter) => (
-                <p
-                  key={filter.name}
-                  className="flex justify-center max-lg:w-full max-lg:justify-normal max-lg:gap-2"
-                >
-                  <span className="hidden max-lg:block">{filter.name}:</span>
-                  {filter.value}
+    <>
+      <div className="max-sm:hidden">
+        <Dialog>
+          <DialogTrigger asChild>{trigger}</DialogTrigger>
+          <DialogContent className="max-w-[1280px] gap-10 bg-white max-lg:min-h-[600px]">
+            <DialogHeader>
+              <a
+                className="text-max-lg relative z-10 mt-10 flex w-full items-center gap-20 border-[1px] border-[#0000001A] p-[34px] font-normal text-black max-lg:mt-0 max-lg:w-[281px] max-lg:flex-col max-lg:items-start max-lg:gap-[24px] max-lg:p-[20px]"
+                href={`/catalog/category/${linkToCategory}/${slugify(
+                  name
+                )}-${id}`}
+              >
+                <p className="w-[200px] text-text-blue max-lg:w-auto">{name}</p>
+                {filters &&
+                  filters.map((filter) => (
+                    <p
+                      key={filter.name}
+                      className="flex justify-center max-lg:w-full max-lg:justify-normal max-lg:gap-2"
+                    >
+                      <span className="hidden max-lg:block">
+                        {filter.name}:
+                      </span>
+                      {filter.value}
+                    </p>
+                  ))}
+                <p>
+                  {price > 1 && (
+                    <span className="hidden max-lg:block">Цена:</span>
+                  )}
+                  {price <= 1 ? 'По запросу' : price.toLocaleString('DE-de')}
                 </p>
-              ))}
-            <p>
-              {price > 1 && <span className="hidden max-lg:block">Цена:</span>}
-              {price <= 1 ? 'По запросу' : price.toLocaleString('DE-de')}
-            </p>
-          </a>
-        </DialogHeader>
-        <div className="flex items-center gap-20 max-lg:w-[281px] max-lg:flex-col max-lg:items-start ">
-          <div className="flex h-[61px] w-[705px] gap-10 max-lg:flex-col max-lg:gap-[20px]">
-            <Select
-              value={variant}
-              onValueChange={(value) => setVariant(value)}
-            >
-              <SelectTrigger className="h-[60px] w-[135px] justify-between rounded-none border-0 bg-[#F4F7F8]">
-                <SelectValue placeholder="Выберите единицу измерения..." />
-              </SelectTrigger>
+              </a>
+            </DialogHeader>
+            <div className="flex items-center gap-20 max-lg:w-[281px] max-lg:flex-col max-lg:items-start ">
+              <div className="flex h-[61px] w-[705px] gap-10 max-lg:flex-col max-lg:gap-[20px]">
+                <Select
+                  value={variant}
+                  onValueChange={(value) => setVariant(value)}
+                >
+                  <SelectTrigger className="h-[60px] w-[135px] justify-between rounded-none border-0 bg-[#F4F7F8]">
+                    <SelectValue placeholder="Выберите единицу измерения..." />
+                  </SelectTrigger>
 
-              <SelectContent>
-                <SelectItem value={'м²'}>м²</SelectItem>
-                <SelectItem value={'шт.'}>Штуки</SelectItem>
-                <SelectItem value={'м'}>м</SelectItem>
-                <SelectItem value={'тн.'}>Тонны</SelectItem>
-              </SelectContent>
-            </Select>
-            <NumberInput value={value} setValue={setValue} />
-          </div>
-          <DialogClose disabled={!/^\d*\.?\d+$/.test(value)} asChild>
-            <Button
-              onClick={() => addProduct(id.toString(), value + ' ' + variant)}
-              className="text-max-lg h-full w-auto flex-1 rounded-none border-0 bg-blue-3 font-medium text-white max-lg:max-h-[55px] max-lg:w-[281px]"
-            >
-              В корзину
-            </Button>
-          </DialogClose>
-        </div>
-      </DialogContent>
-    </Dialog>
+                  <SelectContent>
+                    <SelectItem value={'м²'}>м²</SelectItem>
+                    <SelectItem value={'шт.'}>Штуки</SelectItem>
+                    <SelectItem value={'м'}>м</SelectItem>
+                    <SelectItem value={'тн.'}>Тонны</SelectItem>
+                  </SelectContent>
+                </Select>
+                <NumberInput value={value} setValue={setValue} />
+              </div>
+              <DialogClose disabled={!/^\d*\.?\d+$/.test(value)} asChild>
+                <Button
+                  onClick={() =>
+                    addProduct(id.toString(), value + ' ' + variant)
+                  }
+                  className="text-max-lg h-full w-auto flex-1 rounded-none border-0 bg-blue-3 font-medium text-white max-lg:max-h-[55px] max-lg:w-[281px]"
+                >
+                  В корзину
+                </Button>
+              </DialogClose>
+            </div>
+          </DialogContent>
+        </Dialog>
+      </div>
+
+      <div className="sm:hidden">
+        <Dialog>
+          <DialogTrigger asChild>{trigger}</DialogTrigger>
+          <DialogContent className="max-w-[1280px] gap-10 bg-white rounded-[16px]">
+            <h3 className='text-[20px] font-[500] text-[#131313] leading-[130%] tracking-[0.03px]'>Добавить товар</h3>
+            <DialogHeader>
+              <a
+                className="text-max-lg relative z-10 flex w-full items-center font-normal text-black max-lg:mt-0 max-lg:w-[281px] max-lg:flex-col max-lg:items-start "
+                href={`/catalog/category/${linkToCategory}/${slugify(
+                  name
+                )}-${id}`}
+              >
+                <p className='text-[18px] font-[500] text-[#131313] leading-[130%] tracking-[0.027px]'>Лист горечекатаный</p>
+                <p className="text-black max-lg:w-auto pt-[16px]">{name}</p>
+                {filters &&
+                  filters.map((filter) => (
+                    <p
+                      key={filter.name}
+                      className="flex justify-center max-lg:w-full max-lg:justify-normal max-lg:gap-2"
+                    >
+                      <span className="hidden max-lg:block">
+                        {filter.name}:
+                      </span>
+                      {filter.value}
+                    </p>
+                  ))}
+                <p>
+                  {price > 1 && (
+                    <span className="hidden max-lg:block">Цена:</span>
+                  )}
+                </p>
+              </a>
+            </DialogHeader>
+            <div className="flex w-full items-center max-lg:flex-col max-lg:items-start ">
+              <div className="flex items-center justify-between w-full mt-[20px] gap-[30px]">
+                <Select
+                  value={variant}
+                  onValueChange={(value) => setVariant(value)}
+                >
+                  <SelectTrigger className="px-[16px] border-[1px] border-[#3C3C4399] rounded-[8px] py-[10px]">
+                    <SelectValue placeholder="Выберите единицу измерения..." />
+                  </SelectTrigger>
+
+                  <SelectContent>
+                    <SelectItem value={'м²'}>м²</SelectItem>
+                    <SelectItem value={'шт.'}>Штуки</SelectItem>
+                    <SelectItem value={'м'}>м</SelectItem>
+                    <SelectItem value={'тн.'}>Тонны</SelectItem>
+                  </SelectContent>
+                </Select>
+                <NumberInput value={value} setValue={setValue} />
+              </div>
+              <DialogClose disabled={!/^\d*\.?\d+$/.test(value)} asChild>
+                <Button
+                  onClick={() =>
+                    addProduct(id.toString(), value + ' ' + variant)
+                  }
+                  className="text-max-lg mt-[60px] w-auto flex-1 rounded-[8px] border-0 bg-[#307BAA] font-medium text-white h-[48px] max-lg:w-[281px]"
+                >
+                  В корзину
+                </Button>
+              </DialogClose>
+            </div>
+          </DialogContent>
+        </Dialog>
+      </div>
+    </>
   );
 }

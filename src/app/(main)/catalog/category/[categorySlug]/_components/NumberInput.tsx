@@ -32,18 +32,18 @@ export default function NumberInput({ value, setValue }: NumberInputProps) {
     <div className="flex max-lg:w-[281px]">
       <Button
         onClick={decrement}
-        className="h-full rounded-none px-2 max-lg:h-[60px] max-lg:w-[60px]"
+        className="w-[44px] h-[44px] rounded-[8px] bg-[#131313]"
       >
         -
       </Button>
       <Input
         value={value}
         onChange={handleChange}
-        className="number-input-hide-arrows flex h-full w-[75px] rounded-none bg-gray-2 text-center max-lg:w-[161px]"
+        className="number-input-hide-arrows w-[69px] h-[44px] px-[10px] flex justify-center py-[10px] items-center text-center gap-[10px]"
       />
       <Button
         onClick={increment}
-        className="h-full rounded-none px-2 max-lg:h-[60px] max-lg:w-[60px]"
+        className="w-[44px] h-[44px] rounded-[8px] bg-[#131313]"
       >
         +
       </Button>
