@@ -81,7 +81,7 @@ export default async function SubCategoryPage({
     : [];
 
   return (
-    <div className="flex flex-col gap-10 px-[120px] pb-[200px] pt-10 max-lg:px-[27px] max-sm:px-0 max-lg:pt-[65px] max-sm:pt-0">
+    <div className="flex flex-col sm:gap-10 px-[120px] pb-[200px] pt-10 max-lg:px-[27px] max-sm:px-0 max-lg:pt-[65px] max-sm:pt-0">
       <Breadcrumb
         mainClassName="sm:!block"
         className={'max-md:text-lg flex items-center'}
@@ -91,7 +91,7 @@ export default async function SubCategoryPage({
           { href: params.categorySlug, name: category.name },
         ]}
       />
-        <div className="mobile-breadcrumb-news sm:hidden p-6 mb-3">
+        <div className="mobile-breadcrumb-news sm:hidden p-6 mb-6">
         <BreadcrumbShad>
           <BreadcrumbItem className='h-4 text-[#131313]'>
           <BreadcrumbLink className='text-sm text-[#131313] font-normal font-roboto' as={Link} href='/catalog' >
@@ -106,7 +106,7 @@ export default async function SubCategoryPage({
         
         </BreadcrumbShad>
       </div>
-      <div className="flex flex-col gap-10 max-sm:px-6">
+      <div className="flex flex-col gap-6 sm:gap-10 max-sm:px-6">
         <ProductsList
           initialProducts={sortedProducts}
           categorySlug={params.categorySlug}

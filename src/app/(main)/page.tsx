@@ -203,28 +203,38 @@ import WhyUsCardMobile from './_components/WhyUsCardMobile';
 import SwipperCompany from './_components/swipperCompany';
 import NewsCard from './_components/NewsCard';
 
-const producteDate = [
-  {
-    name: "Арматуры",
-    imge: product1Im
-  },
-  {
-    name: "Трубы",
-    imge: product2Im
-  },
-  {
-    name: "Катанки",
-    imge: product3Im
-  },
-  {
-    name: "Листы",
-    imge: product4Im
-  },
-  {
-    name: "Балки",
-    imge: product5Im
-  },
-]
+async function getCategories(): Promise<Category[]> {
+  return await fetch('https://marcas.pro/api/categories/list', {
+    method: 'GET',
+    cache: 'no-cache',
+  }).then((res) => res.json());
+}
+
+
+// const producteDate = [
+//   {
+//     name: "Арматуры",
+//     imge: product1Im
+//   },
+//   {
+//     name: "Трубы",
+//     imge: product2Im
+//   },
+//   {
+//     name: "Катанки",
+//     imge: product3Im
+//   },
+//   {
+//     name: "Листы",
+//     imge: product4Im
+//   },
+//   {
+//     name: "Балки",
+//     imge: product5Im
+//   },
+// ]
+
+
 
 const listes = [
   {
@@ -256,6 +266,7 @@ import bgSub from "src/assets/MainPage/BG-sub.png"
 import MobileAccordition from './_components/MobileAccordition';
 import ModalPartner from 'src/components/ModalPartner';
 import ModalEmail from 'src/components/ModaleEmail';
+import { Category } from './catalog/page';
 
 
 const cardsData = [
@@ -276,6 +287,9 @@ export default async function Home() {
 
   const products = await getProducts();
 
+  const producteData = await getCategories()
+
+ 
   const openCat = () => {
     window.open('/catalog', "_current")
   }
@@ -340,10 +354,10 @@ export default async function Home() {
 
       <div className="mobile-carde mt-8 bg-white p-6 grid sm:hidden grid-cols-3 gap-y-4 gap-x-2">
              {
-              producteDate.map((nmd, nmk)=>(
+              producteData.slice(0,5).map((nmd, nmk)=>(
                 <div key={nmk} className="carde-gride flex flex-col gap-1 items-center">
                 <div className="tope-im w-[104px] h-[72px] rounded-lg bg-[#F7F7F7] flex items-center justify-center">
-                  <Image src={nmd.imge} alt='product1' />
+                  <Image src={`data:image/webp;base64,${nmd.image}`} alt='product1' width={104} height={72} />
                 </div>
                 <h4 className='text-sm font-normal leading-[18.2px] text-[#131313] text-center'>{nmd.name}</h4>
               </div>

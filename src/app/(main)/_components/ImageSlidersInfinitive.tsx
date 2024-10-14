@@ -19,6 +19,8 @@ const ImageSliderInfinitive: React.FC<ImageSliderProps> = ({ images }) => {
   const [modalOpen , setModalOpen] = useState(false)
 
   const [isPaused, setIsPaused] = useState<boolean>(false);
+  
+  const [indexImg, setIndexImg] = useState<StaticImageData | null>()
 
 
   const scrollRow = (row: HTMLDivElement, speed: number) => {
@@ -69,19 +71,21 @@ const ImageSliderInfinitive: React.FC<ImageSliderProps> = ({ images }) => {
   return (
     <>
    {
-    modalOpen &&  (
+    modalOpen && indexImg &&  (
       <>
-<div className="fixed inset-0 bg-black bg-opacity-50 z-50" onClick={()=> setModalOpen(false)} ></div>
-
-
+<div className="fixed inset-0 bg-black bg-opacity-50 z-50" onClick={()=> {setModalOpen(false); setIndexImg(null)}} >
 <div className="fixed inset-0 flex items-center justify-center z-50">
-  <div className="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full relative">
-    <button onClick={()=> setModalOpen(false)} className="absolute font-roboto text-2xl top-2 right-2 text-gray-500 hover:text-gray-800">
+  <div className="bg-white rounded-lg shadow-lg max-w-sm w-full relative">
+    <button onClick={()=> {setModalOpen(false); setIndexImg(null)}} className="absolute bg-white leading-[1] w-6 rounded-sm font-roboto text-2xl top-2 right-2 text-gray-500 hover:text-gray-800">
       &times;
     </button>
-    <Image src={duplicatedImages[0]} alt='' />
+    <Image src={indexImg} alt='' className='rounded-lg' />
   </div>
 </div>
+</div>
+
+
+
       </>
     )
     
@@ -106,7 +110,7 @@ const ImageSliderInfinitive: React.FC<ImageSliderProps> = ({ images }) => {
             width={200}
             height={200}
             alt={`slider-image-${idx}`}
-            onClick={()=> setModalOpen(true)}
+            onClick={()=> {setIndexImg(src); setModalOpen(true)}}
             className="w-52 h-36 object-cover cursor-pointer hover:scale-110 transition-transform duration-300"
           />
         ))}
@@ -127,7 +131,7 @@ const ImageSliderInfinitive: React.FC<ImageSliderProps> = ({ images }) => {
             height={200}
             alt={`slider-image-${idx}`}
             className="w-52 h-36 object-cover cursor-pointer hover:scale-110 transition-transform duration-300"
-            onClick={()=> setModalOpen(true)}
+            onClick={()=> {setIndexImg(src); setModalOpen(true)}}
           />
         ))}
       </div>

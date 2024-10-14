@@ -17,6 +17,7 @@ import CategoryCard from 'src/app/(main)/cart/_components/CategoryCard';
 
 export type fetchedProductWithAmount = fetchedProduct & {
   amount: string;
+  keyU: string
 };
 
 async function fetchService(id: number): Promise<Service> {
@@ -54,7 +55,7 @@ export default function CartPage() {
         async (productInCart) => {
           try {
             const productDetails = await fetchProduct(productInCart.id);
-            return { ...productDetails, amount: productInCart.amount };
+            return { ...productDetails, amount: productInCart.amount, keyU: productInCart.keyU };
           } catch (error) {
             deleteProduct(productInCart.id);
             return undefined;
@@ -164,8 +165,8 @@ export default function CartPage() {
   };
 
   return (
-    <div className="flex min-h-[895px] w-full flex-col gap-10 pb-20 max-lg:min-h-full max-lg:pb-[200px]">
-      <div className="pl-[120px] pt-10 max-lg:pl-[27px]">
+    <div className="flex min-h-[895px] w-full flex-col sm:gap-10 pb-20 max-lg:min-h-full max-lg:pb-[200px]">
+      <div className="pl-[120px] sm:pt-10 max-lg:pl-[27px]">
         <Breadcrumb
           mainClassName="sm:!block"
           className={'max-md:text-lg'}
@@ -176,14 +177,17 @@ export default function CartPage() {
         />
       </div>
 
-      <div className="flex flex-col gap-10 px-[120px] pt-[24px] max-lg:px-[27px]">
-        <h1 className="border-b border-b-[#3C3C432E] pb-[24px] text-[24px] font-semibold text-black">
+      <div className="flex flex-col gap-10 px-[120px] max-sm:pt-[24px] max-lg:px-[27px] max-sm:px-0">
+      <h1 className="text-5xl max-sm:hidden font-semibold uppercase text-text-blue">
+          Корзина
+        </h1>
+        <h1 className="max-sm:border-b sm:hidden max-sm:border-b-[#3C3C432E] pb-[24px] text-[24px] sm:text- font-semibold text-black max-sm:px-6">
           Корзина ({totalItems})
         </h1>
-        <div className="flex flex-col gap-12">
+        <div className="flex flex-col gap-12 max-sm:px-6">
           {productsInCart.length === 0 ? (
             <div>
-              <p className="text-[#131313] text-[16px] font-[400]">
+              <p className="text-[#131313] sm:hidden text-[16px] font-[400]">
                 Корзина пуста
               </p>
             </div>
@@ -200,10 +204,10 @@ export default function CartPage() {
                   renderProducts()
                 )}
               </div>
-              <Button>Оформить ({totalItems})</Button>
+              <Button className='sm:hidden'>Оформить ({totalItems})</Button>
             </>
           )}
-          <div className="hidden flex-col gap-4 md:flex">
+          <div className="hidden flex-col gap-4 sm:flex">
             <p className="text-2xl font-semibold text-black">
               Товаров: {totalItems}
             </p>

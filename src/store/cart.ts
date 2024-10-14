@@ -2,9 +2,12 @@
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { v4 as uuidv4 } from 'uuid';
+import { generateUniqueKey } from 'src/utils/keyGenerator';
 
 type storeType = {
   products: {
+    keyU: string;
     id: string;
     amount: string;
   }[];
@@ -13,6 +16,7 @@ type storeType = {
   town: string;
   changeTown: (newTown: string) => void;
   addProduct: (id: string, amount: string) => void;
+  addAmount: (id:string , amount: string)=>void;
   addService: (id: string) => void;
   addCategory: (id: string) => void;
   deleteService: (id: string) => void;
@@ -34,10 +38,24 @@ export const cartStore = create<storeType>()(
       addProduct: (id, amount) => {
         set({
           products: get().products.concat({
+            keyU: generateUniqueKey(), 
             id,
             amount,
           }),
         });
+      },
+
+      addAmount: (keyUD, amount) => {
+       const existingProducts = get().products;
+        const productIndex = existingProducts.findIndex((product) => product.keyU === keyUD);
+        
+        if (productIndex !== -1) {
+          const updatedProducts = [...existingProducts];
+          updatedProducts[productIndex].amount = amount;
+          set({ products: updatedProducts });
+        } else {
+          alert('Product not found');
+        }
       },
 
       addService: (id) => {
