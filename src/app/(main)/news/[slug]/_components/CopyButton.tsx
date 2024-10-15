@@ -8,9 +8,11 @@ const CopyButton = (props: Props) => {
     const [copyCl, setCopyCl] = useState(false)
 
     const handleCopy = () => {
+      if (typeof window !== 'undefined') {
         const baseURl = window.location.href
         navigator.clipboard.writeText(baseURl)
       setCopyCl(true)
+      }
     }
   return (
     <Button onClick={handleCopy} className='flex flex-row w-full gap-2 items-center justify-center bg-transparent hover:bg-transparent rounded-lg border border-solid border-[#A2A2A2] text-sm font-normal text-[#414141]'>

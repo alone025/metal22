@@ -17,6 +17,7 @@ export default function ServicesSection({ services }: { services: Service[] }) {
   const addService = useStore(cartStore, (state) => state.addService);
 
   const changePage = (newPage: number) => {
+    if (typeof window !== 'undefined') {
     setCurrentPage(newPage);
     setTimeout(() => {
       title.current.scrollIntoView();
@@ -24,6 +25,7 @@ export default function ServicesSection({ services }: { services: Service[] }) {
     setTimeout(() => {
       window.scrollBy(0, -230);
     }, 10);
+  }
   };
 
   const servicesPerPage = 4;

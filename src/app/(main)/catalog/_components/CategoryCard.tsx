@@ -15,7 +15,7 @@ import AddCategoryPopUp from 'src/app/(main)/catalog/_components/AddCategoryPopU
 export default function CategoryCard(category: Category) {
   return (
     <div className="relative sm:mx-auto flex max-[640px]:justify-between rounded-lg sm:rounded-none w-[530px] max-[640px]:p-3 max-sm:w-40 max-sm:h-40 flex-col sm:items-center justify-between sm:gap-6 bg-gray-2 sm:pt-8 max-lg:w-[320px]">
-      <h3 className="text-left sm:text-center line-clamp-3 text-[14px] sm:text-[28px] font-normal sm:font-bold text-[#131313] sm:text-text-blue">
+      <h3 className="text-left sm:text-center leading-[normal] line-clamp-3 text-[14px] sm:text-[28px] font-normal sm:font-bold text-[#131313] sm:text-text-blue">
         {category.name}
       </h3>
       <a

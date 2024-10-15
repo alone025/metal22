@@ -74,101 +74,104 @@ export default function Header() {
   const clearProducts = useStore(cartStore, (state) => state.clearProducts);
 
   const [scroll, setScroll] = useState(false);
+  const [isHeaderChanging, setIsHeaderChanging] = useState(false);
+  const [lastScrollPosition, setLastScrollPosition] = useState(0);
+  const header = useRef<HTMLDivElement>(null);
+
 
   useEffect(() => {
-    const storedData = localStorage.getItem('local-storage');
+    if (typeof window !== 'undefined') {
+      const storedData = localStorage.getItem('local-storage');
+      if (storedData) {
+        const parsedData = JSON.parse(storedData);
+        const hasProductWithNumericAmount = parsedData.state.products?.some(
+          (product: { amount: string | number }) =>
+            typeof product.amount === 'number'
+        );
 
-    if (storedData) {
-      const parsedData = JSON.parse(storedData);
-      const hasProductWithNumericAmount = parsedData.state.products?.some(
-        (product: { amount: string | number }) =>
-          typeof product.amount === 'number'
-      );
-
-      if (hasProductWithNumericAmount) {
-        parsedData.state.products = [];
-        parsedData.version += 1;
-        clearProducts();
-        localStorage.setItem('local-storage', JSON.stringify(parsedData));
+        if (hasProductWithNumericAmount) {
+          parsedData.state.products = [];
+          parsedData.version += 1;
+          clearProducts();
+          localStorage.setItem('local-storage', JSON.stringify(parsedData));
+        }
       }
     }
   }, [clearProducts]);
 
-  const [isHeaderChanging, setIsHeaderChanging] = useState(false);
-  const [lastScrollPosition, setLastScrollPosition] = useState(0);
-
-  const header = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let ticking = false;
+    if (typeof window !== 'undefined') {
+      let ticking = false;
 
-    const listenScrollEvent = () => {
-      const currentScrollPosition = window.scrollY;
+      const listenScrollEvent = () => {
+        const currentScrollPosition = window.scrollY;
 
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          if (!isHeaderChanging) {
-            if (currentScrollPosition > lastScrollPosition) {
-              setScroll(true);
-              setIsHeaderChanging(true);
-              setTimeout(() => {
-                setIsHeaderChanging(false);
-              }, 100);
-            } else if (currentScrollPosition < lastScrollPosition) {
-              setIsHeaderChanging(true);
-              setTimeout(() => {
-                setIsHeaderChanging(false);
-              }, 100);
-              setScroll(false);
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            if (!isHeaderChanging) {
+              if (currentScrollPosition > lastScrollPosition) {
+                setScroll(true);
+                setIsHeaderChanging(true);
+                setTimeout(() => {
+                  setIsHeaderChanging(false);
+                }, 100);
+              } else if (currentScrollPosition < lastScrollPosition) {
+                setIsHeaderChanging(true);
+                setTimeout(() => {
+                  setIsHeaderChanging(false);
+                }, 100);
+                setScroll(false);
+              }
             }
-          }
+            setLastScrollPosition(currentScrollPosition);
+            ticking = false;
+          });
+        }
+      };
 
-          setLastScrollPosition(currentScrollPosition);
-          ticking = false;
-        });
-      }
-    };
-
-    window.addEventListener('scroll', listenScrollEvent);
-    return () => {
-      window.removeEventListener('scroll', listenScrollEvent);
-    };
+      window.addEventListener('scroll', listenScrollEvent);
+      return () => {
+        window.removeEventListener('scroll', listenScrollEvent);
+      };
+    }
   }, [lastScrollPosition, isHeaderChanging]);
 
+
   useEffect(() => {
-    const handleHashChange = () => {
-      const { hash } = window.location;
-      if (hash) {
-        const id = hash.replace('#', '');
-        const element = document.getElementById(id);
-        if (element) {
-          setScroll(true);
-          setTimeout(() => {
-            if (header.current) {
-              const headerHeight = header.current.offsetHeight;
+    if (typeof window !== 'undefined') {
+      const handleHashChange = () => {
+        const { hash } = window.location;
+        if (hash) {
+          const id = hash.replace('#', '');
+          const element = document.getElementById(id);
+          if (element) {
+            setScroll(true);
+            setTimeout(() => {
+              if (header.current) {
+                const headerHeight = header.current.offsetHeight;
+                const elementPosition =
+                  element.getBoundingClientRect().top + window.scrollY;
+                const offsetPosition = elementPosition - headerHeight;
 
-              const elementPosition =
-                element.getBoundingClientRect().top + window.scrollY;
-              const offsetPosition = elementPosition - headerHeight;
-
-              window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth',
-              });
-            }
-          }, 0);
+                window.scrollTo({
+                  top: offsetPosition,
+                  behavior: 'smooth',
+                });
+              }
+            }, 0);
+          }
         }
-      }
-    };
+      };
 
-    handleHashChange();
+      handleHashChange();
+      window.addEventListener('hashchange', handleHashChange);
 
-    window.addEventListener('hashchange', handleHashChange);
-
-    return () => window.removeEventListener('hashchange', handleHashChange);
+      return () => window.removeEventListener('hashchange', handleHashChange);
+    }
   }, []);
 
-  const currentScrollPositionStyle = window.scrollY;
+  const currentScrollPositionStyle = typeof window !== 'undefined' ? window.scrollY : 0;
 
   return (
     <div

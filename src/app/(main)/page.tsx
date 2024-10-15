@@ -193,11 +193,7 @@ const defaultSlides: Slidess[] = [
   },
 ];
 
-import product1Im from "src/assets/MainPage/product-1.png"
-import product2Im from "src/assets/MainPage/product-2.png"
-import product3Im from "src/assets/MainPage/product-3.png"
-import product4Im from "src/assets/MainPage/product-4.png"
-import product5Im from "src/assets/MainPage/product-5.png"
+
 import Link from 'next/link';
 import WhyUsCardMobile from './_components/WhyUsCardMobile';
 import SwipperCompany from './_components/swipperCompany';
@@ -259,8 +255,7 @@ const listes = [
   },
 ]
 
-import cardImage1 from 'src/assets/CardImage/truckImage.png' 
-import cardImage2 from 'src/assets/CardImage/metalImage.png' 
+
 
 import bgSub from "src/assets/MainPage/BG-sub.png"
 import MobileAccordition from './_components/MobileAccordition';
@@ -269,18 +264,7 @@ import ModalEmail from 'src/components/ModaleEmail';
 import { Category } from './catalog/page';
 
 
-const cardsData = [
-  {
-    h5:'Логистический Прорыв в России',
-    p:'В августе 2024 года правительство России объявило о запуске масштабного проекта по модернизации логистической инфраструктуры страны. В рамках программы планируется улучшение и расширение железнодорожных, автомобильных и морских путей сообщения, а также строительство новых логистических центров по всей территории России.',
-    image: cardImage1
-  },
-  {
-    h5:'Увеличение Производства Металлопроката в России для Удовлетворения Растущего Спроса',
-    p:'Особое внимание уделяется производству высококачественного сортового проката и продукции для строительства и машиностроения. Ожидается, что благодаря модернизации производственных линий и увеличению объемов выпуска, российские компании смогут занять лидирующие позиции на мировом рынке металлопроката, удовлетворяя потребности в различных секторах экономики.',
-    image: cardImage2
-  }
-]
+
 
 export default async function Home() {
   const { news } = await getNews();
@@ -290,9 +274,7 @@ export default async function Home() {
   const producteData = await getCategories()
 
  
-  const openCat = () => {
-    window.open('/catalog', "_current")
-  }
+ 
 
 
 

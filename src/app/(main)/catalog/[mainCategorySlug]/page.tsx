@@ -27,7 +27,12 @@ async function fetchCategory(id: number) {
           }
         ).then((res) => res.json());
 
-        subcategory.image = productResponse[0]?.Product?.image ?? '';
+        if(productResponse) {
+          subcategory.image = productResponse[0]?.Product?.image ?? '';
+        } else {
+          subcategory.image = ''
+        }
+
         return subcategory;
       })
     );

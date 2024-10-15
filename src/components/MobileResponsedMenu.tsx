@@ -1,40 +1,16 @@
 'use client';
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from 'components//ui/select';
+
 import Image from 'next/image';
-import icon from 'src/assets/Header/icon.svg';
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  navigationMenuTriggerStyle,
-} from 'components//ui/navigation-menu';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from 'components//ui/dropdown-menu';
-import { Button } from 'components//ui/button';
-import React, { useEffect, useState } from 'react';
+
+
+import React, { useEffect } from 'react';
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerHeader,
-  DrawerTrigger,
 } from 'components//ui/drawer';
-import menuIcon from 'src/assets/Header/List.svg';
-import { usePathname } from 'next/navigation';
-import { useStore } from 'zustand';
-import { cartStore } from 'src/store/cart';
+
 import logoIcon from 'src/assets/Header/logo.svg';
 
 const menuItems = [
@@ -76,16 +52,15 @@ setIsOpen: (e: boolean)=>void
 }
 
 export default function MobileResponsedMenu({isOpen, setIsOpen}: MobilePropsRes) {
-  const pathname = usePathname();
+  
 
   useEffect(() => {
     setIsOpen(false);
-  }, [pathname]);
+  });
 
 
 
-  const town = useStore(cartStore, (state) => state.town);
-  const changeTown = useStore(cartStore, (state) => state.changeTown);
+  
 
   return (
     <Drawer

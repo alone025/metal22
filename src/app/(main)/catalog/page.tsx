@@ -76,7 +76,7 @@ export default async function CatalogPage() {
             ))}
         </div>
 
-        <div className="tabse-contente">
+        <div className="tabse-contente sm:hidden">
      
      <Tabs defaultValue="product">
  <TabsList>

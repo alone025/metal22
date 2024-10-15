@@ -8,13 +8,13 @@ const TabMobile = (props: Props) => {
   const [pathname, setPathname] = useState('')
   const [hashTage, setHashTage] = useState('')
 
-const handleNewPageOpen = (e: string, eb: string) => {
- if(e){
-  window.open(`/${e}`, '_current')
-  // window.location.reload()
-  // setActiveTab(eb)
- }
-}
+  const handleNewPageOpen = (e: string, eb: string) => {
+    if (typeof window !== "undefined") {
+   if(e){
+    window.open(`/${e}`, '_current')
+   }
+  }
+  }
 
 useEffect(()=>{
 
@@ -39,7 +39,6 @@ useEffect(() => {
       setPathname(window.location.pathname);
       setHashTage(window.location.hash)
     };
-
   
     window.addEventListener('popstate', handleLocationChange);
 

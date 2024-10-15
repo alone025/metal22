@@ -204,7 +204,47 @@ export default function CartPage() {
                   renderProducts()
                 )}
               </div>
-              <Button className='sm:hidden'>Оформить ({totalItems})</Button>
+              {totalItems > 0 && !isLoading && (
+              <SendOrderPopUp
+                trigger={
+                  <Button className='sm:hidden bg-[#307BAA] h-12 font-roboto text-base'>Оформить ({totalItems})</Button>
+                }
+                products={convertedProducts}
+                services={services}
+                categories={categories}
+                callback={(name: string, phone: string) => {
+                  const productsText = convertedProducts
+                    ? convertedProducts
+                        .map(
+                          ({ product, amount }) =>
+                            `${product.name} - ${product.id} ID количество ${amount}`
+                        )
+                        .join(', ')
+                    : '';
+
+                  const servicesText = services
+                    ? services
+                        .map((service) => `${service.Title} - ${service.Id} ID`)
+                        .join(', ')
+                    : '';
+
+                  const categoriesText = categories
+                    ? categories
+                        .map(
+                          (category) => `${category.name} - ${category.id} ID`
+                        )
+                        .join(', ')
+                    : '';
+
+                  const orderText = `Город: ${town};\nТелефон: ${phone};\nИмя: ${name};\nТовары: ${productsText};${
+                    servicesText && `\nУслуги: ${servicesText};`
+                  }${categoriesText && `\nКатегории: ${categoriesText};`}`;
+
+                  sendOrder(orderText);
+                }}
+              />
+            )}
+            
             </>
           )}
           <div className="hidden flex-col gap-4 sm:flex">

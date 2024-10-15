@@ -24,11 +24,16 @@ const Tabbar = (props: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const locatione = (e: string) => {
+    if (typeof window !== "undefined") {
     window.open(`/${e}`, "_current")
+    }
   }
 
   useEffect(()=> {
+    if (typeof window !== "undefined") {
+
     setPathe(window.location.pathname)
+    }
   }, [])
 
 

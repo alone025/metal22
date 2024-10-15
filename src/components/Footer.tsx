@@ -40,21 +40,21 @@ const linkers = [
 
 export default function Footer() {
 
-  const [pathname, setPathname] = useState(window.location.pathname);
+  const [pathname, setPathname] = useState('');
 
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setPathname(window.location.pathname);
-    
-  
+
       const handleLocationChange = () => {
         setPathname(window.location.pathname);
       };
-  
-    
+
+
       window.addEventListener('popstate', handleLocationChange);
-  
+
+    
       return () => {
         window.removeEventListener('popstate', handleLocationChange);
       };
